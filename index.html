@@ -1,0 +1,3022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Isekai ✦</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ====================================================== */
+
+        :root {
+
+            --bg: #eee5d6;
+            --bg-secondary: #e2d3bc;
+
+            --card: rgba(255, 250, 241, 0.78);
+
+            --text: #302a24;
+            --text-soft: #766d62;
+
+            --accent: #9b8060;
+            --accent-dark: #6e583d;
+
+            --border: rgba(89, 72, 52, 0.18);
+
+            --shadow:
+                0 20px 45px rgba(65, 50, 35, 0.12);
+
+            --menu-bg: rgba(248, 241, 230, 0.95);
+
+            --modal-bg: rgba(249, 242, 232, 0.98);
+
+            --transition: 0.35s ease;
+        }
+
+
+        /* =====================================================
+           MODO OSCURO
+        ====================================================== */
+
+        body.dark {
+
+            --bg: #171513;
+            --bg-secondary: #211e1a;
+
+            --card: rgba(37, 34, 30, 0.88);
+
+            --text: #eee7dc;
+            --text-soft: #aaa196;
+
+            --accent: #c3a77b;
+            --accent-dark: #ddc096;
+
+            --border: rgba(225, 207, 178, 0.14);
+
+            --shadow:
+                0 20px 50px rgba(0, 0, 0, 0.4);
+
+            --menu-bg: rgba(34, 31, 27, 0.96);
+
+            --modal-bg: rgba(30, 27, 24, 0.98);
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(255, 255, 255, 0.48),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(154, 128, 96, 0.08),
+                    transparent 32%
+                ),
+                var(--bg);
+
+            color: var(--text);
+
+            font-family: "Inter", sans-serif;
+
+            transition:
+                background var(--transition),
+                color var(--transition);
+        }
+
+
+        /* =====================================================
+           SÍMBOLOS
+        ====================================================== */
+
+        .floating-symbol {
+
+            position: fixed;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+            color: var(--accent);
+
+            opacity: 0.16;
+
+            animation:
+                floatingSymbol 7s ease-in-out infinite;
+        }
+
+
+        .symbol-one {
+            top: 14%;
+            left: 7%;
+            font-size: 25px;
+        }
+
+
+        .symbol-two {
+            top: 33%;
+            right: 8%;
+            font-size: 18px;
+            animation-delay: 1s;
+        }
+
+
+        .symbol-three {
+            bottom: 17%;
+            left: 11%;
+            font-size: 19px;
+            animation-delay: 2s;
+        }
+
+
+        .symbol-four {
+            bottom: 9%;
+            right: 18%;
+            font-size: 27px;
+            animation-delay: 3s;
+        }
+
+
+        .symbol-five {
+            top: 57%;
+            left: 48%;
+            font-size: 13px;
+            animation-delay: 1.5s;
+        }
+
+
+        @keyframes floatingSymbol {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-12px)
+                    rotate(8deg);
+            }
+        }
+
+
+        /* =====================================================
+           MENÚ
+        ====================================================== */
+
+        .menu-wrapper {
+
+            position: fixed;
+
+            top: 50%;
+            right: 25px;
+
+            transform:
+                translateY(-50%);
+
+            z-index: 1000;
+        }
+
+
+        .menu-button {
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                var(--menu-bg);
+
+            color: var(--text);
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(15px);
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+
+            transition:
+                transform var(--transition);
+        }
+
+
+        .menu-button:hover {
+
+            transform:
+                scale(1.08);
+        }
+
+
+        .menu-button span {
+
+            display: block;
+
+            letter-spacing: 3px;
+
+            transform:
+                rotate(90deg);
+
+            margin-left: 3px;
+        }
+
+
+        /* =====================================================
+           PANEL DEL MENÚ
+        ====================================================== */
+
+        .menu-panel {
+
+            position: absolute;
+
+            top: 50%;
+            right: 70px;
+
+            width: 215px;
+
+            padding: 17px;
+
+            border-radius: 22px;
+
+            background:
+                var(--menu-bg);
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(20px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform:
+                translateY(-50%)
+                translateX(15px)
+                scale(0.96);
+
+            transition:
+                opacity var(--transition),
+                transform var(--transition),
+                visibility var(--transition);
+        }
+
+
+        .menu-panel.open {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translateY(-50%)
+                translateX(0)
+                scale(1);
+        }
+
+
+        .menu-title {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 24px;
+
+            text-align: center;
+
+            color:
+                var(--accent-dark);
+
+            margin-bottom: 10px;
+        }
+
+
+        .menu-line {
+
+            width: 45px;
+
+            height: 1px;
+
+            background:
+                var(--accent);
+
+            margin:
+                0 auto 13px;
+        }
+
+
+        .menu-link,
+        .theme-button {
+
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition:
+                background var(--transition),
+                color var(--transition);
+        }
+
+
+        .menu-link:hover,
+        .theme-button:hover {
+
+            background:
+                rgba(154, 128, 96, 0.12);
+
+            color:
+                var(--accent-dark);
+        }
+
+
+        .menu-icon {
+
+            width: 20px;
+
+            text-align: center;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ====================================================== */
+
+        main {
+
+            position: relative;
+
+            z-index: 2;
+
+            width:
+                min(1180px, 90%);
+
+            margin:
+                auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+
+            min-height: 88vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            max-width: 800px;
+
+            padding:
+                40px 20px;
+        }
+
+
+        .top-decoration {
+
+            position: absolute;
+
+            top: 20%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            color:
+                var(--accent);
+
+            font-size: 18px;
+
+            opacity: 0.65;
+        }
+
+
+        .title-symbols {
+
+            color:
+                var(--accent);
+
+            font-size: 22px;
+
+            letter-spacing: 8px;
+
+            margin-bottom: 25px;
+
+            opacity: 0.85;
+        }
+
+
+        .eyebrow {
+
+            font-size: 10px;
+
+            letter-spacing: 5px;
+
+            color:
+                var(--text-soft);
+
+            margin-bottom: 18px;
+
+            font-weight: 500;
+        }
+
+
+        .hero h1 {
+
+            margin: 0;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(82px, 13vw, 145px);
+
+            font-weight: 500;
+
+            letter-spacing: 4px;
+
+            line-height: 0.9;
+
+            color:
+                var(--text);
+
+            position: relative;
+        }
+
+
+        .hero h1::before {
+
+            content: "✦";
+
+            position: absolute;
+
+            top: -22px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 13px;
+
+            color:
+                var(--accent);
+        }
+
+
+        .title-line {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            margin:
+                25px auto 22px;
+
+            color:
+                var(--accent);
+
+            font-size: 13px;
+        }
+
+
+        .title-line::before,
+        .title-line::after {
+
+            content: "";
+
+            width: 70px;
+
+            height: 1px;
+
+            background:
+                var(--border);
+        }
+
+
+        .hero-subtitle {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 22px;
+
+            line-height: 1.5;
+
+            color:
+                var(--text-soft);
+
+            font-style: italic;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .scroll-hint {
+
+            position: absolute;
+
+            bottom: 35px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            color:
+                var(--text-soft);
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            white-space: nowrap;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .scroll-hint span {
+
+            color:
+                var(--accent);
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           SECCIONES
+        ====================================================== */
+
+        section {
+
+            padding:
+                100px 0;
+        }
+
+
+        .section-heading {
+
+            text-align: center;
+
+            margin-bottom:
+                65px;
+        }
+
+
+        .section-symbol {
+
+            color:
+                var(--accent);
+
+            font-size: 19px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-heading h2 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(42px, 6vw, 65px);
+
+            font-weight: 500;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-heading p {
+
+            color:
+                var(--text-soft);
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           GRID
+        ====================================================== */
+
+        .characters-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 24px;
+        }
+
+
+        /* =====================================================
+           TARJETAS
+        ====================================================== */
+
+        .character-card {
+
+            background:
+                var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(10px);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                background var(--transition);
+
+            position: relative;
+
+            cursor: pointer;
+        }
+
+
+        .character-card::before {
+
+            content: "✦";
+
+            position: absolute;
+
+            top: 12px;
+            right: 14px;
+
+            z-index: 3;
+
+            color: white;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+
+        .character-card::after {
+
+            content: "VER FICHA";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 43%;
+
+            transform:
+                translate(-50%, -50%);
+
+            color: white;
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            opacity: 0;
+
+            z-index: 5;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+
+        .character-card:hover {
+
+            transform:
+                translateY(-9px);
+
+            box-shadow:
+                0 28px 55px
+                rgba(65, 50, 35, 0.18);
+        }
+
+
+        .character-card:hover::before,
+        .character-card:hover::after {
+
+            opacity: 1;
+        }
+
+
+        .character-image {
+
+            width: 100%;
+
+            aspect-ratio:
+                4 / 5;
+
+            overflow: hidden;
+
+            background:
+                var(--bg-secondary);
+
+            position: relative;
+        }
+
+
+        .character-image::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                rgba(30, 24, 18, 0.3);
+
+            opacity: 0;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+
+        .character-card:hover
+        .character-image::after {
+
+            opacity: 1;
+        }
+
+
+        .character-image img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 0.7s ease,
+                filter 0.4s ease;
+        }
+
+
+        .character-card:hover
+        .character-image img {
+
+            transform:
+                scale(1.05);
+
+            filter:
+                brightness(0.88);
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN DE TARJETA
+        ====================================================== */
+
+        .character-info {
+
+            padding:
+                21px 20px 25px;
+        }
+
+
+        .character-name {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 29px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+        }
+
+
+        .character-meta {
+
+            display: flex;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 16px;
+
+            color:
+                var(--accent-dark);
+
+            font-size: 11px;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .character-meta span {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+        }
+
+
+        .bio {
+
+            font-size: 11.5px;
+
+            line-height: 1.8;
+
+            color:
+                var(--text-soft);
+        }
+
+
+        .bio::before {
+
+            content: "◇";
+
+            color:
+                var(--accent);
+
+            margin-right: 5px;
+        }
+
+
+        .mystery-card .character-info {
+
+            text-align: center;
+        }
+
+
+        .mystery-card .bio {
+
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+           MODAL / FICHA AMPLIADA
+        ====================================================== */
+
+        .character-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 2000;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            background:
+                rgba(20, 17, 14, 0.72);
+
+            backdrop-filter:
+                blur(10px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity 0.35s ease,
+                visibility 0.35s ease;
+        }
+
+
+        .character-modal.open {
+
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .modal-content {
+
+            width:
+                min(900px, 100%);
+
+            max-height:
+                min(720px, 90vh);
+
+            overflow-y: auto;
+
+            background:
+                var(--modal-bg);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 35px 100px
+                rgba(0, 0, 0, 0.35);
+
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                42% 58%;
+
+            transform:
+                translateY(25px)
+                scale(0.96);
+
+            transition:
+                transform 0.4s ease;
+        }
+
+
+        .character-modal.open
+        .modal-content {
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+
+        /* =====================================================
+           IMAGEN DEL MODAL
+        ====================================================== */
+
+        .modal-image {
+
+            min-height: 570px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius:
+                27px 0 0 27px;
+        }
+
+
+        .modal-image img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .modal-image::after {
+
+            content: "✦";
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 30px;
+
+            color: white;
+
+            font-size: 22px;
+
+            opacity: 0.85;
+        }
+
+
+        /* =====================================================
+           CONTENIDO DEL MODAL
+        ====================================================== */
+
+        .modal-info {
+
+            padding:
+                60px 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+        }
+
+
+        .modal-small-title {
+
+            color:
+                var(--accent);
+
+            font-size: 9px;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .modal-name {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(48px, 6vw, 70px);
+
+            font-weight: 500;
+
+            line-height: 0.95;
+
+            margin-bottom: 24px;
+        }
+
+
+        .modal-line {
+
+            width: 65px;
+
+            height: 1px;
+
+            background:
+                var(--accent);
+
+            margin-bottom: 25px;
+        }
+
+
+        .modal-meta {
+
+            display: flex;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 30px;
+        }
+
+
+        .modal-meta-item {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+
+        .modal-meta-label {
+
+            color:
+                var(--text-soft);
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .modal-meta-value {
+
+            color:
+                var(--accent-dark);
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 22px;
+        }
+
+
+        .modal-description {
+
+            color:
+                var(--text-soft);
+
+            font-size: 13px;
+
+            line-height: 2;
+
+            max-width: 500px;
+        }
+
+
+        .modal-description p {
+
+            margin-bottom: 10px;
+        }
+
+
+        .modal-decoration {
+
+            margin-top: 30px;
+
+            color:
+                var(--accent);
+
+            font-size: 16px;
+
+            letter-spacing: 8px;
+        }
+
+
+        /* =====================================================
+           BOTÓN CERRAR
+        ====================================================== */
+
+        .modal-close {
+
+            position: absolute;
+
+            top: 18px;
+            right: 18px;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                var(--modal-bg);
+
+            color:
+                var(--text);
+
+            cursor: pointer;
+
+            z-index: 20;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease;
+        }
+
+
+        .modal-close:hover {
+
+            transform:
+                rotate(90deg);
+
+            background:
+                rgba(154, 128, 96, 0.12);
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN DEL MUNDO
+        ====================================================== */
+
+        .about-box {
+
+            max-width: 760px;
+
+            margin:
+                auto;
+
+            text-align:
+                center;
+
+            padding:
+                55px 45px;
+
+            border-top:
+                1px solid var(--border);
+
+            border-bottom:
+                1px solid var(--border);
+
+            position:
+                relative;
+        }
+
+
+        .about-box::before,
+        .about-box::after {
+
+            content: "✧";
+
+            position: absolute;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--accent);
+
+            font-size: 22px;
+        }
+
+
+        .about-box::before {
+            left: -10px;
+        }
+
+
+        .about-box::after {
+            right: -10px;
+        }
+
+
+        .about-box h2 {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 48px;
+
+            font-weight: 500;
+
+            margin-bottom: 20px;
+        }
+
+
+        .about-box p {
+
+            color:
+                var(--text-soft);
+
+            font-size: 14px;
+
+            line-height: 2;
+
+            max-width: 620px;
+
+            margin:
+                auto;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+
+            padding:
+                70px 0 45px;
+
+            text-align:
+                center;
+
+            color:
+                var(--text-soft);
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .footer-symbol {
+
+            display:
+                block;
+
+            color:
+                var(--accent);
+
+            font-size: 18px;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* =====================================================
+           ANIMACIÓN SCROLL
+        ====================================================== */
+
+        .fade-in {
+
+            opacity: 0;
+
+            transform:
+                translateY(25px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+
+        .fade-in.visible {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           BARRA DEL MODAL
+        ====================================================== */
+
+        .modal-content::-webkit-scrollbar {
+
+            width: 6px;
+        }
+
+
+        .modal-content::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .modal-content::-webkit-scrollbar-thumb {
+
+            background:
+                var(--accent);
+
+            border-radius: 10px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE TABLET
+        ====================================================== */
+
+        @media (max-width: 1000px) {
+
+            .characters-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+
+            .modal-content {
+
+                width:
+                    min(760px, 100%);
+            }
+
+
+            .modal-info {
+
+                padding:
+                    45px 38px;
+            }
+        }
+
+
+        /* =====================================================
+           RESPONSIVE MÓVIL
+        ====================================================== */
+
+        @media (max-width: 650px) {
+
+            main {
+
+                width:
+                    min(92%, 500px);
+            }
+
+
+            .menu-wrapper {
+
+                right: 15px;
+            }
+
+
+            .menu-button {
+
+                width: 52px;
+                height: 52px;
+            }
+
+
+            .menu-panel {
+
+                right: 62px;
+            }
+
+
+            .hero {
+
+                min-height: 80vh;
+            }
+
+
+            .hero h1 {
+
+                font-size: 78px;
+
+                letter-spacing: 1px;
+            }
+
+
+            .hero-subtitle {
+
+                font-size: 18px;
+            }
+
+
+            .eyebrow {
+
+                font-size: 8px;
+
+                letter-spacing: 3px;
+            }
+
+
+            .title-line::before,
+            .title-line::after {
+
+                width: 45px;
+            }
+
+
+            section {
+
+                padding:
+                    75px 0;
+            }
+
+
+            .characters-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+
+            .character-card {
+
+                max-width: 420px;
+
+                width: 100%;
+
+                margin:
+                    auto;
+            }
+
+
+            /* Modal móvil */
+
+            .character-modal {
+
+                padding: 15px;
+            }
+
+
+            .modal-content {
+
+                display: block;
+
+                max-height:
+                    92vh;
+
+                border-radius: 22px;
+            }
+
+
+            .modal-image {
+
+                height: 350px;
+
+                min-height: 350px;
+
+                border-radius:
+                    21px 21px 0 0;
+            }
+
+
+            .modal-info {
+
+                padding:
+                    35px 28px 40px;
+            }
+
+
+            .modal-name {
+
+                font-size: 52px;
+            }
+
+
+            .modal-meta {
+
+                margin-bottom: 24px;
+            }
+
+
+            .modal-description {
+
+                font-size: 12px;
+
+                line-height: 1.9;
+            }
+
+
+            .modal-close {
+
+                width: 38px;
+                height: 38px;
+            }
+
+
+            .about-box {
+
+                padding:
+                    40px 25px;
+            }
+
+
+            .about-box h2 {
+
+                font-size: 39px;
+            }
+
+
+            .floating-symbol {
+
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SÍMBOLOS
+    ====================================================== -->
+
+    <div class="floating-symbol symbol-one">
+        ✦
+    </div>
+
+    <div class="floating-symbol symbol-two">
+        ◇
+    </div>
+
+    <div class="floating-symbol symbol-three">
+        ✧
+    </div>
+
+    <div class="floating-symbol symbol-four">
+        ⋆
+    </div>
+
+    <div class="floating-symbol symbol-five">
+        ✦
+    </div>
+
+
+
+    <!-- =====================================================
+         MENÚ
+    ====================================================== -->
+
+    <div class="menu-wrapper">
+
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
+
+            <span>
+                •••
+            </span>
+
+        </button>
+
+
+        <nav
+            class="menu-panel"
+            id="menuPanel"
+        >
+
+            <div class="menu-title">
+                Isekai
+            </div>
+
+
+            <div class="menu-line"></div>
+
+
+            <a
+                class="menu-link"
+                href="#inicio"
+            >
+
+                <span class="menu-icon">
+                    ☾
+                </span>
+
+                Inicio
+
+            </a>
+
+
+            <a
+                class="menu-link"
+                href="#personajes"
+            >
+
+                <span class="menu-icon">
+                    ✦
+                </span>
+
+                Personajes
+
+            </a>
+
+
+            <a
+                class="menu-link"
+                href="#mundo"
+            >
+
+                <span class="menu-icon">
+                    ◇
+                </span>
+
+                El mundo
+
+            </a>
+
+
+            <button
+                class="theme-button"
+                id="themeButton"
+                type="button"
+            >
+
+                <span
+                    class="menu-icon"
+                    id="themeIcon"
+                >
+                    ☾
+                </span>
+
+                <span id="themeText">
+                    Modo oscuro
+                </span>
+
+            </button>
+
+        </nav>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             PORTADA
+        ================================================== -->
+
+        <section
+            class="hero"
+            id="inicio"
+        >
+
+
+            <div class="top-decoration">
+                ✦
+            </div>
+
+
+            <div class="hero-content">
+
+
+                <div class="title-symbols">
+                    ☾　✧
+                </div>
+
+
+                <p class="eyebrow">
+                    UNA HISTORIA ENTRE MUNDOS
+                </p>
+
+
+                <h1>
+                    Isekai
+                </h1>
+
+
+                <div class="title-line">
+
+                    <span>
+                        ✦
+                    </span>
+
+                </div>
+
+
+                <p class="hero-subtitle">
+
+                    Un mundo desconocido.<br>
+
+                    Una aventura que acaba de comenzar.
+
+                </p>
+
+            </div>
+
+
+            <div class="scroll-hint">
+
+                <span>
+                    ✧
+                </span>
+
+                DESCUBRE LA HISTORIA
+
+                <span>
+                    ↓
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PERSONAJES
+        ================================================== -->
+
+        <section
+            id="personajes"
+            class="fade-in"
+        >
+
+
+            <div class="section-heading">
+
+
+                <div class="section-symbol">
+                    ✧
+                </div>
+
+
+                <h2>
+                    Personajes
+                </h2>
+
+
+                <p>
+                    Algunos rostros de este nuevo mundo
+                </p>
+
+
+            </div>
+
+
+
+            <div class="characters-grid">
+
+
+                <!-- =================================================
+                     SHADOW
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Shadow"
+                    data-age="19 años"
+                    data-height="1,78 m"
+                    data-image="https://i.pinimg.com/736x/e2/e4/16/e2e416fac5f25406718fe2f2c968fe75.jpg"
+                    data-description="Tiene un carácter orgulloso y no suele molestarse en ocultarlo.|Acostumbrado a conseguir lo que quiere, puede parecer bastante distante.|Sin embargo, quienes consiguen acercarse a él conocen otra faceta.|Nadie sabe exactamente qué busca en este nuevo mundo."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/736x/e2/e4/16/e2e416fac5f25406718fe2f2c968fe75.jpg"
+                            alt="Shadow"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Shadow
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 19 años
+                            </span>
+
+                            <span>
+                                ♢ 1,78 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Tiene un carácter orgulloso y no suele molestarse en ocultarlo.
+                            <br>
+                            Acostumbrado a conseguir lo que quiere, puede parecer bastante distante.
+                            <br>
+                            Sin embargo, quienes consiguen acercarse a él conocen otra faceta.
+                            <br>
+                            Nadie sabe exactamente qué busca en este nuevo mundo.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     SANDRA
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Sandra"
+                    data-age="17 años"
+                    data-height="1,58 m"
+                    data-image="https://i.pinimg.com/736x/ed/bd/f0/edbdf0a16b7432fec7182cbc26dc9ff5.jpg"
+                    data-description="Dulce y atenta, suele preocuparse demasiado por los demás.|Al principio puede parecer tímida, aunque tiene bastante carácter.|Es difícil verla abandonar a alguien que necesita ayuda.|Hay una razón por la que se tomó tan en serio aprender a curar."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/736x/ed/bd/f0/edbdf0a16b7432fec7182cbc26dc9ff5.jpg"
+                            alt="Sandra"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Sandra
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 17 años
+                            </span>
+
+                            <span>
+                                ♢ 1,58 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Dulce y atenta, suele preocuparse demasiado por los demás.
+                            <br>
+                            Al principio puede parecer tímida, aunque tiene bastante carácter.
+                            <br>
+                            Es difícil verla abandonar a alguien que necesita ayuda.
+                            <br>
+                            Hay una razón por la que se tomó tan en serio aprender a curar.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     LUSHI
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Lushi"
+                    data-age="17 años"
+                    data-height="1,68 m"
+                    data-image="https://i.pinimg.com/736x/1c/ea/e1/1ceae10527dc0b52704e577825fafd49.jpg"
+                    data-description="Alegre, curiosa y con una energía difícil de seguir.|Le encanta descubrir lugares nuevos y meterse donde no debería.|Desde que conoció al protagonista decidió acompañarlo en sus aventuras.|Aunque parezca despistada, quizá esconda más de lo que aparenta."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/736x/1c/ea/e1/1ceae10527dc0b52704e577825fafd49.jpg"
+                            alt="Lushi"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Lushi
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 17 años
+                            </span>
+
+                            <span>
+                                ♢ 1,68 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Alegre, curiosa y con una energía difícil de seguir.
+                            <br>
+                            Le encanta descubrir lugares nuevos y meterse donde no debería.
+                            <br>
+                            Desde que conoció al protagonista decidió acompañarlo en sus aventuras.
+                            <br>
+                            Aunque parezca despistada, quizá esconda más de lo que aparenta.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     GARLIC
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Garlic"
+                    data-age="18 años"
+                    data-height="1,80 m"
+                    data-image="https://i.pinimg.com/736x/be/04/29/be04299e21c605fb8a3e03217472f1b6.jpg"
+                    data-description="Serio, reservado y con muy poca paciencia.|No suele hablar de más y observa mucho más de lo que dice.|Con sus amigos, sin embargo, puede resultar sorprendentemente cercano.|Su manera de enfrentarse a los problemas es... bastante peculiar."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/736x/be/04/29/be04299e21c605fb8a3e03217472f1b6.jpg"
+                            alt="Garlic"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Garlic
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 19 años
+                            </span>
+
+                            <span>
+                                ♢ 1,80 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Serio, reservado y con muy poca paciencia.
+                            <br>
+                            No suele hablar de más y observa mucho más de lo que dice.
+                            <br>
+                            Con sus amigos, sin embargo, puede resultar sorprendentemente cercano.
+                            <br>
+                            Su manera de enfrentarse a los problemas es... bastante peculiar.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     MANU
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Manu"
+                    data-age="18 años"
+                    data-height="1,80 m"
+                    data-image="https://i.pinimg.com/736x/b5/10/4b/b5104bcd0c6f5b474c1b7fece084049d.jpg"
+                    data-description="Tiene facilidad para hacer bromas incluso en los peores momentos.|Puede parecer algo extraño al principio, pero se encariña rápido.|Últimamente hay algo que parece acompañarlo a todas partes.|Él asegura que no pasa nada... aunque no todos le creen."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/736x/b5/10/4b/b5104bcd0c6f5b474c1b7fece084049d.jpg"
+                            alt="Manu"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Manu
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 18 años
+                            </span>
+
+                            <span>
+                                ♢ 1,80 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Tiene facilidad para hacer bromas incluso en los peores momentos.
+                            <br>
+                            Puede parecer algo extraño al principio, pero se encariña rápido.
+                            <br>
+                            Últimamente hay algo que parece acompañarlo a todas partes.
+                            <br>
+                            Él asegura que no pasa nada... aunque no todos le creen.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     KASKITO
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Kaskito"
+                    data-age="18 años"
+                    data-height="1,78 m"
+                    data-image="https://i.pinimg.com/474x/f7/b3/d6/f7b3d6c2dfaea52f6d43a691a55f6017.jpg"
+                    data-description="Tranquilo y algo nervioso, prefiere evitar los problemas.|Curiosamente, cuando todo se complica suele ser de los más fiables.|Tiene una clara vocación por ayudar a los demás.|Quizá su aparente sencillez esconda más experiencia de la esperada."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/474x/f7/b3/d6/f7b3d6c2dfaea52f6d43a691a55f6017.jpg"
+                            alt="Kaskito"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Kaskito
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 18 años
+                            </span>
+
+                            <span>
+                                ♢ 1,78 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Tranquilo y algo nervioso, prefiere evitar los problemas.
+                            <br>
+                            Curiosamente, cuando todo se complica suele ser de los más fiables.
+                            <br>
+                            Tiene una clara vocación por ayudar a los demás.
+                            <br>
+                            Quizá su aparente sencillez esconda más experiencia de la esperada.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     ASPI
+                ================================================== -->
+
+                <article
+                    class="character-card"
+                    data-name="Aspi"
+                    data-age="19 años"
+                    data-height="1,80 m"
+                    data-image="https://i.pinimg.com/474x/31/1c/22/311c2272ca11f4c8c533b3a55ed02f1c.jpg"
+                    data-description="Calmado, observador y bastante difícil de sorprender.|Prefiere pensar antes de actuar y rara vez deja algo al azar.|Tiene un humor seco que no todo el mundo entiende.|Nadie parece saber exactamente dónde aprendió a moverse así."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/474x/31/1c/22/311c2272ca11f4c8c533b3a55ed02f1c.jpg"
+                            alt="Aspi"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Aspi
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ 19 años
+                            </span>
+
+                            <span>
+                                ♢ 1,80 m
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Calmado, observador y bastante difícil de sorprender.
+                            <br>
+                            Prefiere pensar antes de actuar y rara vez deja algo al azar.
+                            <br>
+                            Tiene un humor seco que no todo el mundo entiende.
+                            <br>
+                            Nadie parece saber exactamente dónde aprendió a moverse así.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     GABRIEL
+                ================================================== -->
+
+                <article
+                    class="character-card mystery-card"
+                    data-name="Gabriel"
+                    data-age="???"
+                    data-height="???"
+                    data-image="https://i.pinimg.com/736x/c1/4c/31/c14c31b40bad6a58287fa509abb365de.jpg"
+                    data-description="Poco se sabe sobre él.|Su presencia resulta difícil de ignorar.|Nadie parece tener demasiadas respuestas.|Quizá sea mejor dejar algunas preguntas sin resolver."
+                >
+
+
+                    <div class="character-image">
+
+                        <img
+                            src="https://i.pinimg.com/736x/c1/4c/31/c14c31b40bad6a58287fa509abb365de.jpg"
+                            alt="Gabriel"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="character-info">
+
+                        <h3 class="character-name">
+                            Gabriel
+                        </h3>
+
+
+                        <div class="character-meta">
+
+                            <span>
+                                ♢ ???
+                            </span>
+
+                            <span>
+                                ♢ ???
+                            </span>
+
+                        </div>
+
+
+                        <p class="bio">
+
+                            Poco se sabe sobre él.
+                            <br>
+                            Su presencia resulta difícil de ignorar.
+                            <br>
+                            Nadie parece tener demasiadas respuestas.
+                            <br>
+                            Quizá sea mejor dejar algunas preguntas sin resolver.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MUNDO
+        ================================================== -->
+
+        <section
+            id="mundo"
+            class="fade-in"
+        >
+
+
+            <div class="about-box">
+
+
+                <div class="section-symbol">
+                    ◇
+                </div>
+
+
+                <h2>
+                    Un mundo por descubrir
+                </h2>
+
+
+                <p>
+
+                    Nuevos lugares, nuevas personas y secretos
+                    que todavía permanecen ocultos.
+                    En este mundo, no todo es lo que parece,
+                    y quizá algunas historias estén esperando
+                    el momento adecuado para salir a la luz.
+
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         MODAL DE PERSONAJE
+    ====================================================== -->
+
+    <div
+        class="character-modal"
+        id="characterModal"
+        aria-hidden="true"
+    >
+
+
+        <div class="modal-content">
+
+
+            <button
+                class="modal-close"
+                id="modalClose"
+                type="button"
+                aria-label="Cerrar ficha"
+            >
+
+                ✕
+
+            </button>
+
+
+            <div class="modal-image">
+
+                <img
+                    id="modalImage"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="modal-info">
+
+
+                <div class="modal-small-title">
+                    FICHA DE PERSONAJE
+                </div>
+
+
+                <h2
+                    class="modal-name"
+                    id="modalName"
+                >
+                    Personaje
+                </h2>
+
+
+                <div class="modal-line"></div>
+
+
+                <div class="modal-meta">
+
+
+                    <div class="modal-meta-item">
+
+                        <span class="modal-meta-label">
+                            Edad
+                        </span>
+
+                        <span
+                            class="modal-meta-value"
+                            id="modalAge"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="modal-meta-item">
+
+                        <span class="modal-meta-label">
+                            Altura
+                        </span>
+
+                        <span
+                            class="modal-meta-value"
+                            id="modalHeight"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="modal-description"
+                    id="modalDescription"
+                >
+                </div>
+
+
+                <div class="modal-decoration">
+                    ✧　✦　✧
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+
+        <span class="footer-symbol">
+            ✦　☾　✧
+        </span>
+
+
+        Isekai · Una historia entre mundos
+
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           MENÚ
+        ====================================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const menuPanel =
+            document.getElementById("menuPanel");
+
+
+        menuButton.addEventListener(
+            "click",
+            function () {
+
+                const isOpen =
+                    menuPanel.classList.toggle("open");
+
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(".menu-link")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        menuPanel.classList.remove(
+                            "open"
+                        );
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    !menuPanel.contains(event.target) &&
+                    !menuButton.contains(event.target)
+                ) {
+
+                    menuPanel.classList.remove(
+                        "open"
+                    );
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           MODO CLARO / OSCURO
+        ====================================================== */
+
+        const themeButton =
+            document.getElementById("themeButton");
+
+        const themeText =
+            document.getElementById("themeText");
+
+        const themeIcon =
+            document.getElementById("themeIcon");
+
+
+        themeButton.addEventListener(
+            "click",
+            function () {
+
+                document.body.classList.toggle(
+                    "dark"
+                );
+
+
+                const darkMode =
+                    document.body.classList.contains(
+                        "dark"
+                    );
+
+
+                if (darkMode) {
+
+                    themeText.textContent =
+                        "Modo claro";
+
+                    themeIcon.textContent =
+                        "☀";
+
+                } else {
+
+                    themeText.textContent =
+                        "Modo oscuro";
+
+                    themeIcon.textContent =
+                        "☾";
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           FICHAS DE PERSONAJE
+        ====================================================== */
+
+        const characterCards =
+            document.querySelectorAll(
+                ".character-card"
+            );
+
+
+        const characterModal =
+            document.getElementById(
+                "characterModal"
+            );
+
+
+        const modalClose =
+            document.getElementById(
+                "modalClose"
+            );
+
+
+        const modalImage =
+            document.getElementById(
+                "modalImage"
+            );
+
+
+        const modalName =
+            document.getElementById(
+                "modalName"
+            );
+
+
+        const modalAge =
+            document.getElementById(
+                "modalAge"
+            );
+
+
+        const modalHeight =
+            document.getElementById(
+                "modalHeight"
+            );
+
+
+        const modalDescription =
+            document.getElementById(
+                "modalDescription"
+            );
+
+
+        /* =====================================================
+           ABRIR FICHA
+        ====================================================== */
+
+        characterCards.forEach(
+            function (card) {
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        const name =
+                            card.dataset.name;
+
+                        const age =
+                            card.dataset.age;
+
+                        const height =
+                            card.dataset.height;
+
+                        const image =
+                            card.dataset.image;
+
+                        const description =
+                            card.dataset.description;
+
+
+                        modalName.textContent =
+                            name;
+
+                        modalAge.textContent =
+                            age;
+
+                        modalHeight.textContent =
+                            height;
+
+                        modalImage.src =
+                            image;
+
+                        modalImage.alt =
+                            name;
+
+
+                        modalDescription.innerHTML =
+                            "";
+
+
+                        description
+                            .split("|")
+                            .forEach(
+                                function (line) {
+
+                                    const paragraph =
+                                        document.createElement(
+                                            "p"
+                                        );
+
+                                    paragraph.textContent =
+                                        line;
+
+                                    modalDescription.appendChild(
+                                        paragraph
+                                    );
+
+                                }
+                            );
+
+
+                        characterModal.classList.add(
+                            "open"
+                        );
+
+
+                        characterModal.setAttribute(
+                            "aria-hidden",
+                            "false"
+                        );
+
+
+                        document.body.style.overflow =
+                            "hidden";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CERRAR FICHA
+        ====================================================== */
+
+        function closeCharacterModal() {
+
+            characterModal.classList.remove(
+                "open"
+            );
+
+
+            characterModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        modalClose.addEventListener(
+            "click",
+            closeCharacterModal
+        );
+
+
+
+        /* =====================================================
+           CERRAR HACIENDO CLICK FUERA
+        ====================================================== */
+
+        characterModal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    characterModal
+                ) {
+
+                    closeCharacterModal();
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CERRAR CON ESC
+        ====================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    characterModal.classList.contains(
+                        "open"
+                    )
+                ) {
+
+                    closeCharacterModal();
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           ANIMACIONES AL HACER SCROLL
+        ====================================================== */
+
+        const animatedElements =
+            document.querySelectorAll(
+                ".fade-in"
+            );
+
+
+        const observer =
+            new IntersectionObserver(
+                function (entries) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        animatedElements.forEach(
+            function (element) {
+
+                observer.observe(element);
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
