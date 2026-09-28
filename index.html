@@ -1576,7 +1576,6 @@
         /* El contenido permanece por encima del cielo */
         main,
         footer,
-        .menu-wrapper,
         .floating-symbol,
         .character-modal {
             position: relative;
@@ -1651,10 +1650,11 @@
             }
 
             .menu-wrapper {
-                top: auto;
+                position: fixed;
+                top: 50%;
                 right: 14px;
-                bottom: 18px;
-                transform: none;
+                bottom: auto;
+                transform: translateY(-50%);
             }
 
             .menu-button {
@@ -1664,16 +1664,16 @@
             }
 
             .menu-panel {
-                top: auto;
-                bottom: 62px;
-                right: 0;
+                top: 50%;
+                bottom: auto;
+                right: 62px;
                 width: min(215px, calc(100vw - 82px));
-                transform: translateY(12px) scale(0.96);
-                transform-origin: bottom right;
+                transform: translateY(-50%) translateX(15px) scale(0.96);
+                transform-origin: center right;
             }
 
             .menu-panel.open {
-                transform: translateY(0) scale(1);
+                transform: translateY(-50%) translateX(0) scale(1);
             }
 
             .hero {
