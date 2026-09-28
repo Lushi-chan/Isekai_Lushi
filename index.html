@@ -707,6 +707,10 @@
             letter-spacing: 1px;
         }
 
+        .carousel-hint {
+            display: none;
+        }
+
 
         /* =====================================================
            GRID
@@ -1743,30 +1747,62 @@
                 padding: 0 12px;
             }
 
-            /* Los personajes forman una cinta vertical: una ficha debajo de otra.
-               Cada ficha conserva imagen + información en horizontal para que se vea
-               todo de un vistazo incluso en una pantalla pequeña. */
+            .carousel-hint {
+                display: block;
+                margin-top: 8px;
+                font-size: 9px !important;
+                letter-spacing: 0.8px !important;
+                opacity: 0.75;
+            }
+
+            /* =================================================
+               PERSONAJES EN CARRUSEL PARA MÓVIL
+               Las tarjetas se deslizan horizontalmente con el dedo.
+               Cada tarjeta mantiene su tamaño y se puede pulsar
+               para abrir la ficha completa.
+            ================================================== */
+
             .characters-grid {
                 display: flex;
-                flex-direction: column;
-                gap: 18px;
-                width: 100%;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                gap: 16px;
+                width: calc(100vw - 20px);
+                max-width: none;
+                margin-left: -1px;
+                padding: 4px 20px 18px 1px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                scroll-padding-left: 1px;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-x: contain;
+                scrollbar-width: none;
+            }
+
+            .characters-grid::-webkit-scrollbar {
+                display: none;
             }
 
             .character-card {
-                display: grid;
-                grid-template-columns: 125px minmax(0, 1fr);
-                width: 100%;
-                max-width: none;
+                flex: 0 0 78vw;
+                width: 78vw;
+                max-width: 330px;
+                min-width: 260px;
+                min-height: 0;
                 margin: 0;
-                min-height: 170px;
+                display: flex;
+                flex-direction: column;
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+                cursor: pointer;
             }
 
             .character-image {
-                width: 125px;
-                height: 100%;
-                min-height: 170px;
-                aspect-ratio: auto;
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                aspect-ratio: 4 / 5;
             }
 
             .character-image img {
@@ -1777,14 +1813,14 @@
 
             .character-info {
                 min-width: 0;
-                padding: 18px 16px 20px;
+                padding: 16px 16px 18px;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
             }
 
             .character-name {
-                font-size: clamp(24px, 7vw, 30px);
+                font-size: clamp(25px, 7vw, 32px);
                 line-height: 1;
                 margin-bottom: 8px;
             }
@@ -1798,6 +1834,13 @@
             .bio {
                 font-size: 10.5px;
                 line-height: 1.55;
+            }
+
+            /* Indicador visual para dejar claro que hay más personajes */
+            .characters-grid::after {
+                content: "";
+                flex: 0 0 1px;
+                width: 1px;
             }
 
             /* En móvil no dependemos del hover */
@@ -1897,13 +1940,9 @@
             }
 
             .character-card {
-                grid-template-columns: 105px minmax(0, 1fr);
-                min-height: 155px;
-            }
-
-            .character-image {
-                width: 105px;
-                min-height: 155px;
+                flex-basis: 82vw;
+                width: 82vw;
+                min-width: 245px;
             }
 
             .character-info {
@@ -2195,6 +2234,10 @@
 
                 <p>
                     Algunos rostros de este nuevo mundo
+                </p>
+
+                <p class="carousel-hint">
+                    Desliza para ver todos los personajes · Pulsa una tarjeta para abrir su ficha
                 </p>
 
 
