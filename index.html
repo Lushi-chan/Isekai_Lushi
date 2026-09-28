@@ -1591,8 +1591,7 @@
         /* El contenido permanece por encima del cielo */
         main,
         footer,
-        .floating-symbol,
-        .character-modal {
+        .floating-symbol {
             position: relative;
         }
 
@@ -1600,7 +1599,6 @@
         footer { z-index: 2; }
         .menu-wrapper { z-index: 1000; }
         .floating-symbol { z-index: 3; }
-        .character-modal { z-index: 2000; }
 
         /* =====================================================
            RESPONSIVE TABLET
@@ -2010,54 +2008,80 @@
     </style>
 
 <style id="mobile-character-modal-fix">
-/* Ficha de personaje: siempre es una ventana superpuesta al viewport */
-.character-modal {
+/* FICHA: overlay real del viewport. Nunca forma parte del flujo de main. */
+.character-modal,
+.character-modal.open {
     position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
     inset: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
     height: 100dvh !important;
+    min-height: 100dvh !important;
     margin: 0 !important;
     padding: 10px !important;
+    box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    overflow: hidden !important;
     z-index: 2147483647 !important;
-    box-sizing: border-box !important;
 }
 
 .character-modal:not(.open) {
     pointer-events: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 .character-modal.open {
     pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.character-modal .modal-content {
+.character-modal > .modal-content {
     position: relative !important;
-    z-index: 1 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
     width: min(900px, 100%) !important;
-    max-height: min(720px, 90vh) !important;
-    margin: 0 !important;
+    max-width: 900px !important;
+    max-height: min(720px, 90dvh) !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
 }
 
 @media (max-width: 650px) {
-    .character-modal {
+    .character-modal,
+    .character-modal.open {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
         inset: 0 !important;
         width: 100vw !important;
+        height: 100vh !important;
         height: 100dvh !important;
-        max-height: none !important;
+        min-height: 100dvh !important;
         padding: 10px !important;
         align-items: center !important;
         justify-content: center !important;
     }
 
-    .character-modal .modal-content {
+    .character-modal > .modal-content {
         width: 100% !important;
         max-width: 520px !important;
         max-height: 94dvh !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
+        transform: none !important;
     }
 }
 </style>
@@ -3425,6 +3449,22 @@
                                 }
                             );
 
+
+                        /* La ficha se monta directamente en BODY y se fuerza como
+                           una ventana del viewport, nunca como parte de MAIN. */
+                        if (characterModal.parentElement !== document.body) {
+                            document.body.appendChild(characterModal);
+                        }
+
+                        characterModal.style.position = "fixed";
+                        characterModal.style.top = "0";
+                        characterModal.style.right = "0";
+                        characterModal.style.bottom = "0";
+                        characterModal.style.left = "0";
+                        characterModal.style.width = "100vw";
+                        characterModal.style.height = "100dvh";
+                        characterModal.style.margin = "0";
+                        characterModal.style.zIndex = "2147483647";
 
                         characterModal.classList.add(
                             "open"
