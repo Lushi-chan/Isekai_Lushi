@@ -2008,6 +2008,59 @@
             }
         }
     </style>
+
+<style id="mobile-character-modal-fix">
+/* Ficha de personaje: siempre es una ventana superpuesta al viewport */
+.character-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 2147483647 !important;
+    box-sizing: border-box !important;
+}
+
+.character-modal:not(.open) {
+    pointer-events: none !important;
+}
+
+.character-modal.open {
+    pointer-events: auto !important;
+}
+
+.character-modal .modal-content {
+    position: relative !important;
+    z-index: 1 !important;
+    width: min(900px, 100%) !important;
+    max-height: min(720px, 90vh) !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 650px) {
+    .character-modal {
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100dvh !important;
+        max-height: none !important;
+        padding: 10px !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .character-modal .modal-content {
+        width: 100% !important;
+        max-width: 520px !important;
+        max-height: 94dvh !important;
+        margin: 0 !important;
+    }
+}
+</style>
 </head>
 
 
