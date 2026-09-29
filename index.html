@@ -198,17 +198,64 @@
            MENÚ
         ====================================================== */
 
-        .menu-wrapper {
+        .floating-controls {
 
             position: fixed;
 
-            top: 50%;
+            top: 22px;
             right: 25px;
 
-            transform:
-                translateY(-50%);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
 
             z-index: 1000;
+        }
+
+
+        .menu-wrapper {
+
+            position: relative;
+
+            z-index: 1000;
+        }
+
+
+        .theme-floating-button {
+
+            width: 50px;
+            height: 50px;
+
+            border-radius: 50%;
+
+            border: 1px solid var(--border);
+
+            background: var(--menu-bg);
+
+            color: var(--text);
+
+            box-shadow: var(--shadow);
+
+            backdrop-filter: blur(15px);
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+
+            transition:
+                transform var(--transition),
+                background var(--transition);
+        }
+
+
+        .theme-floating-button:hover {
+            transform: scale(1.08);
         }
 
 
@@ -267,59 +314,6 @@
         }
 
 
-
-        /* =====================================================
-           CONTROLES FLOTANTES — TEMA + MENÚ
-        ====================================================== */
-
-        .floating-controls {
-            position: fixed;
-            top: 22px;
-            right: 22px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .theme-floating-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            background: var(--menu-bg);
-            color: var(--text);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(15px);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 19px;
-            transition: transform var(--transition), background var(--transition), color var(--transition);
-        }
-
-        .theme-floating-button:hover { transform: scale(1.08); }
-
-        .menu-wrapper {
-            position: relative;
-            top: auto;
-            right: auto;
-            transform: none;
-            z-index: 1000;
-        }
-
-        .menu-panel {
-            top: 62px;
-            right: 0;
-            transform: translateY(-8px) scale(0.96);
-            transform-origin: top right;
-        }
-
-        .menu-panel.open {
-            transform: translateY(0) scale(1);
-        }
-
         /* =====================================================
            PANEL DEL MENÚ
         ====================================================== */
@@ -328,8 +322,8 @@
 
             position: absolute;
 
-            top: 50%;
-            right: 70px;
+            top: calc(100% + 10px);
+            right: 0;
 
             width: 215px;
 
@@ -464,6 +458,31 @@
             text-align: center;
 
             font-size: 16px;
+        }
+
+
+        .map-box {
+            overflow: hidden;
+        }
+
+
+        .map-container {
+            width: 100%;
+            margin-top: 25px;
+            border-radius: 18px;
+            overflow: auto;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            background: var(--bg-secondary);
+        }
+
+
+        .map-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 75vh;
+            object-fit: contain;
         }
 
 
@@ -1462,31 +1481,6 @@
         }
 
 
-
-        /* =====================================================
-           MAPA
-        ====================================================== */
-
-        .map-container {
-            width: 100%;
-            max-width: 1050px;
-            margin: 0 auto;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            background: var(--card);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-        }
-
-        .map-container img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-        }
-
         /* =====================================================
            FOOTER
         ====================================================== */
@@ -1675,6 +1669,7 @@
 
         main { z-index: 2; }
         footer { z-index: 2; }
+        .floating-controls { z-index: 1000; }
         .menu-wrapper { z-index: 1000; }
         .floating-symbol { z-index: 3; }
 
@@ -1740,29 +1735,31 @@
                 width: min(92%, 500px);
             }
 
-            .floating-controls {
-                top: 14px;
+            .menu-wrapper {
+                position: fixed;
+                top: 50%;
                 right: 14px;
-                gap: 8px;
+                bottom: auto;
+                transform: translateY(-50%);
             }
 
-            .theme-floating-button,
             .menu-button {
-                width: 48px;
-                height: 48px;
-                font-size: 18px;
+                width: 52px;
+                height: 52px;
+                font-size: 19px;
             }
 
             .menu-panel {
-                top: 58px;
-                right: 0;
-                width: min(215px, calc(100vw - 28px));
-                transform: translateY(-8px) scale(0.96);
-                transform-origin: top right;
+                top: 50%;
+                bottom: auto;
+                right: 62px;
+                width: min(215px, calc(100vw - 82px));
+                transform: translateY(-50%) translateX(15px) scale(0.96);
+                transform-origin: center right;
             }
 
             .menu-panel.open {
-                transform: translateY(0) scale(1);
+                transform: translateY(-50%) translateX(0) scale(1);
             }
 
             .hero {
@@ -1993,15 +1990,6 @@
                 right: 12px;
             }
 
-            .map-container {
-                padding: 7px;
-                border-radius: 20px;
-            }
-
-            .map-container img {
-                border-radius: 14px;
-            }
-
             .about-box {
                 padding: 38px 22px;
             }
@@ -2072,7 +2060,6 @@
         /* Pantallas táctiles: eliminamos efectos hover que pueden quedarse "pegados" */
         @media (hover: none) {
             .menu-button:hover,
-            .theme-floating-button:hover,
             .menu-link:hover,
             .theme-button:hover,
             .modal-close:hover {
@@ -2091,7 +2078,29 @@
                 transition-duration: 0.01ms !important;
             }
         }
-    </style>
+    
+
+        @media (max-width: 650px) {
+
+            .floating-controls {
+                top: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+
+            .theme-floating-button,
+            .menu-button {
+                width: 48px;
+                height: 48px;
+            }
+
+            .menu-panel {
+                right: 0;
+                width: min(215px, calc(100vw - 30px));
+            }
+        }
+
+</style>
 
 <style id="mobile-character-modal-fix">
 /* FICHA: overlay real del viewport. Nunca forma parte del flujo de main. */
@@ -2228,6 +2237,7 @@
 
         <div class="menu-wrapper">
 
+
         <button
             class="menu-button"
             id="menuButton"
@@ -2296,11 +2306,13 @@
                 Mapa
 
             </a>
-</nav>
+
+
+
+
+        </nav>
 
         </div>
-
-    </div>
 
     </div>
 
@@ -3108,7 +3120,7 @@
             class="fade-in"
         >
 
-            <div class="section-heading">
+            <div class="about-box map-box">
 
                 <div class="section-symbol">
                     ◇
@@ -3119,20 +3131,62 @@
                 </h2>
 
                 <p>
-                    Explora el mundo de Isekai
+                    Explora el mundo de Isekai.
                 </p>
 
-            </div>
+                <div class="map-container">
+                    <img
+                        src="https://i.pinimg.com/736x/a9/22/1c/a9221c1c337892cbe175bb61f1a86d97.jpg"
+                        alt="Mapa del mundo de Isekai"
+                        loading="lazy"
+                    >
+                </div>
 
-            <div class="map-container">
-                <img
-                    src="https://i.pinimg.com/736x/a9/22/1c/a9221c1c337892cbe175bb61f1a86d97.jpg"
-                    alt="Mapa del mundo de Isekai"
-                    loading="lazy"
-                >
             </div>
 
         </section>
+
+
+        <!-- =================================================
+             MUNDO
+        ================================================== -->
+
+        <section
+            id="mundo"
+            class="fade-in"
+        >
+
+
+            <div class="about-box">
+
+
+                <div class="section-symbol">
+                    ◇
+                </div>
+
+
+                <h2>
+                    Un mundo por descubrir
+                </h2>
+
+
+                <p>
+
+                    Nuevos lugares, nuevas personas y secretos
+                    que todavía permanecen ocultos.
+                    En este mundo, no todo es lo que parece,
+                    y quizá algunas historias estén esperando
+                    el momento adecuado para salir a la luz.
+
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+
 
 
     </main>
@@ -3362,8 +3416,6 @@
         const themeButton =
             document.getElementById("themeButton");
 
-        // El modo oscuro es el estado inicial de la página.
-        document.body.classList.add("dark");
 
         const themeIcon =
             document.getElementById("themeIcon");
@@ -3374,8 +3426,10 @@
             const darkMode =
                 document.body.classList.contains("dark");
 
+
             themeIcon.textContent =
                 darkMode ? "☀" : "☾";
+
 
             themeButton.setAttribute(
                 "aria-label",
@@ -3384,48 +3438,27 @@
                     : "Cambiar a modo oscuro"
             );
 
+
             themeButton.setAttribute(
                 "title",
                 darkMode
                     ? "Cambiar a modo claro"
                     : "Cambiar a modo oscuro"
             );
+
         }
 
+
         updateThemeButton();
+
 
         themeButton.addEventListener(
             "click",
             function () {
+
                 document.body.classList.toggle("dark");
+
                 updateThemeButton();
-            }
-        );
-
-
-                const darkMode =
-                    document.body.classList.contains(
-                        "dark"
-                    );
-
-
-                if (darkMode) {
-
-                    themeText.textContent =
-                        "Modo claro";
-
-                    themeIcon.textContent =
-                        "☀";
-
-                } else {
-
-                    themeText.textContent =
-                        "Modo oscuro";
-
-                    themeIcon.textContent =
-                        "☾";
-
-                }
 
             }
         );
