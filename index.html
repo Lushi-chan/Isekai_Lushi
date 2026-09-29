@@ -348,7 +348,7 @@
             visibility: hidden;
 
             transform:
-                translateY(-50%)
+                translateY(0)
                 translateX(15px)
                 scale(0.96);
 
@@ -366,7 +366,7 @@
             visibility: visible;
 
             transform:
-                translateY(-50%)
+                translateY(0)
                 translateX(0)
                 scale(1);
         }
@@ -463,10 +463,21 @@
 
         .map-box {
             overflow: hidden;
+            text-align: center;
+        }
+
+
+        /* Al llegar al mapa desde el menú, deja espacio para los controles superiores */
+        #mapa {
+            scroll-margin-top: 110px;
+            text-align: center;
         }
 
 
         .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             margin-top: 25px;
             border-radius: 18px;
@@ -480,9 +491,11 @@
         .map-container img {
             display: block;
             width: 100%;
+            max-width: 100%;
             height: auto;
             max-height: 75vh;
             object-fit: contain;
+            margin: 0 auto;
         }
 
 
