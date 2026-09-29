@@ -2192,6 +2192,56 @@
         transform: none !important;
     }
 }
+
+        /* =====================================================
+           CONTROLES EN HORIZONTAL — MÓVIL
+           Igual que en PC: tema + menú uno al lado del otro.
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            .floating-controls {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 10px;
+
+                z-index: 9999;
+            }
+
+            .theme-floating-button,
+            .menu-button {
+                width: 50px;
+                height: 50px;
+
+                flex-shrink: 0;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .menu-wrapper {
+                position: relative;
+            }
+
+            .menu-panel {
+                position: absolute;
+
+                top: calc(100% + 10px);
+                right: 0;
+
+                width: 320px;
+                max-width: calc(100vw - 30px);
+
+                transform-origin: top right;
+            }
+        }
+
 </style>
 </head>
 
